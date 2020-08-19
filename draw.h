@@ -7,7 +7,7 @@
 #define WIDTH 800
 #define HEIGHT 608
 
-//WIDTH and height of each character in pixels
+//width and height of each character in pixels
 const int dW=4,dH=8;
 
 //set cursor at start to avoid flickering
