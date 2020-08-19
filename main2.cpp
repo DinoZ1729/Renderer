@@ -72,9 +72,9 @@ public:
 		if(vec[2]>0)	return 0;
 		double xI=-vec[0]/vec[2];
 		double yI=-vec[1]/vec[2];
-		xI*=WIGHT/dW/2;
-		yI*=WIGHT/dH/2;
-		xI+=WIGHT/dW/2;
+		xI*=WIDTH/dW/2;
+		yI*=WIDTH/dH/2;
+		xI+=WIDTH/dW/2;
 		yI+=HEIGHT/dH/2;
 		int A=(int)xI,B=(int)yI;
 		cooInt[0]=A;
@@ -85,14 +85,14 @@ public:
 	
 	
 	
-	void renderPoint(char platno[HEIGHT/dH][WIGHT/dW],double tx,double ty,double tz,char c)
+	void renderPoint(char platno[HEIGHT/dH][WIDTH/dW],double tx,double ty,double tz,char c)
 	{
 		int vec[2];
 		convert(vec,tx,ty,tz);
 		drawPoint(platno,vec[0],vec[1],c);
 	}
 	
-	void renderLine(char platno[HEIGHT/dH][WIGHT/dW],double tx1,double ty1,double tz1,double tx2,double ty2,double tz2,char c)
+	void renderLine(char platno[HEIGHT/dH][WIDTH/dW],double tx1,double ty1,double tz1,double tx2,double ty2,double tz2,char c)
 	{
 		int vec1[2],vec2[2];
 		convert(vec1,tx1,ty1,tz1);
@@ -101,7 +101,7 @@ public:
 		drawLine(platno,vec1[0],vec1[1],vec2[0],vec2[1],c);
 	}
 	
-	void renderTriangle(char platno[HEIGHT/dH][WIGHT/dW],double Ax,double Ay,double Az,double Bx,double By,double Bz,double Cx,double Cy,double Cz)
+	void renderTriangle(char platno[HEIGHT/dH][WIDTH/dW],double Ax,double Ay,double Az,double Bx,double By,double Bz,double Cx,double Cy,double Cz)
 	{
 		double
 		A[3]={Ax,Ay,Az},	//vertices
@@ -120,7 +120,7 @@ public:
 		if(!convert(p1,Bx,By,Bz))	return;
 		if(!convert(p2,Cx,Cy,Cz))	return;
 		//shoot the ray through every pixel
-		for(int xi=0;xi<WIGHT/dW;xi++){
+		for(int xi=0;xi<WIDTH/dW;xi++){
 		for(int yi=0;yi<HEIGHT/dH;yi++){
 			double pi[2]={(double)xi+0.5,(double)yi+0.5};
 			//if the ray doesn't hit the triangle then continue
@@ -128,8 +128,8 @@ public:
 			//point is the vector in camera's coordinate system
 			double point[3]=
 			{
-			-(double)(xi-WIGHT/dW/2)/(double)(WIGHT/dW/2),
-			-(double)(yi-HEIGHT/dH/2)/(double)(WIGHT/dH/2),
+			-(double)(xi-WIDTH/dW/2)/(double)(WIDTH/dW/2),
+			-(double)(yi-HEIGHT/dH/2)/(double)(WIDTH/dH/2),
 			1
 			};
 			//we transform it so it is in global coordinate system
@@ -148,7 +148,7 @@ public:
 		}}
 	}
 	
-	void renderTetra(char platno[HEIGHT/dH][WIGHT/dW],tetrahedron tetra,char c1,char c2)
+	void renderTetra(char platno[HEIGHT/dH][WIDTH/dW],tetrahedron tetra,char c1,char c2)
 	{
 		//search Painter's Algorithm for info
 		
@@ -229,10 +229,10 @@ int main()
 	while(1)
 	{
 		camera cam(2,alfa,beta);
-		char platno[HEIGHT/dH][WIGHT/dW];
+		char platno[HEIGHT/dH][WIDTH/dW];
 		
 		for(int i=0;i<HEIGHT/dH;i++){
-		for(int j=0;j<WIGHT/dW;j++){
+		for(int j=0;j<WIDTH/dW;j++){
 			platno[i][j]=0;
 		}}
 		
@@ -240,7 +240,7 @@ int main()
 		
 		//display:
 		for(int i=0;i<HEIGHT/dH;i++){
-		for(int j=0;j<WIGHT/dW;j++){
+		for(int j=0;j<WIDTH/dW;j++){
 			printf("%c",platno[i][j]);
 		}
 		printf("\n");
